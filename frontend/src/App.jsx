@@ -32,7 +32,7 @@ function App() {
         <h1 className="text-2xl md:pl-6 text-white font-bold">ShortcutURL</h1>
       </nav>
 
-      
+
       <form
         onSubmit={handleSubmit}
         className="flex flex-col md:flex-row items-center justify-center w-full md:w-[80%] gap-3"
@@ -52,9 +52,10 @@ function App() {
         </button>
       </form>
 
-      
+
       {shortUrl && (
-        <div className="mt-6 text-lg bg-white w-[80%] md:w-[50%] text-left p-4 rounded shadow">
+        <div className="mt-6 text-lg break-words
+ bg-white w-[80%] md:w-[50%] text-left p-4 rounded shadow">
           Short URL:{" "}
           <a
             href={shortUrl}
@@ -67,7 +68,7 @@ function App() {
         </div>
       )}
 
-      
+
       <footer className="w-full bg-slate-950 p-2  mt-10 text-center text-gray-400 text-sm">
         © {new Date().getFullYear()} ShortcutURL | Developed by nikhil chouksey
       </footer>
