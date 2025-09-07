@@ -35,7 +35,7 @@ function App() {
   return (
     <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-between">
 
-      <nav className="w-full  bg-slate-950 p-2 text-center md:text-left ">
+      <nav className="w-full  bg-slate-950 p-2 text-center  ">
         <h1 className="text-2xl md:pl-6 text-white font-bold">ShortcutURL</h1>
       </nav>
 
