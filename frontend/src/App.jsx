@@ -2,13 +2,18 @@ import { useState } from "react";
 
 function App() {
   const [url, setUrl] = useState("");
-  const [shortUrl, setShortUrl] = useState("");
+  const [shortUrl, setShortUrl] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
+
+    setLoading(true);
+
     e.preventDefault();
     if (!url) return;
 
     try {
+
       const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/url`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -22,6 +27,8 @@ function App() {
       }
     } catch (error) {
       console.error("Error generating short URL:", error);
+    } finally {
+      setLoading(false)
     }
   };
 
@@ -48,10 +55,35 @@ function App() {
           type="submit"
           className="bg-blue-800 w-[90%] md:w-[25%] text-gray-100 p-3 rounded-md active:scale-95 transition"
         >
-          Get short URL
+          {loading ? "Generating..." : "Generate"}
         </button>
       </form>
 
+      {loading && (
+        <div className="mt-4 flex items-center gap-2 text-blue-600">
+          <svg
+            className="animate-spin h-6 w-6 text-blue-600"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              className="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              strokeWidth="4"
+            ></circle>
+            <path
+              className="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8v8z"
+            ></path>
+          </svg>
+          Generating Short URL...
+        </div>
+      )}
 
       {shortUrl && (
         <div className="mt-6 text-lg break-words
