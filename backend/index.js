@@ -1,12 +1,16 @@
 const express = require('express') ; 
 const {connectToMongoDB} = require('./connect');
-const urlRoute = require('./controllers/routes/url');
+const urlRoute = require('./routes/url');
 const URL = require('./models/url'); 
+const cors = require("cors");
+require('dotenv').config(); 
+
 
 const app = express(); 
-const PORT = 8000; 
+const PORT = process.env.PORT || 5000; 
 
-connectToMongoDB("mongodb://localhost:27017/url_shortner")
+
+connectToMongoDB(process.env.MONGODB_URL)
 .then(()=>{
   console.log("MongoDB connected"); 
 })
@@ -16,6 +20,8 @@ connectToMongoDB("mongodb://localhost:27017/url_shortner")
 })
 
 app.use(express.json()); 
+
+app.use(cors({origin:process.env.FRONTEND_URL || '*'}));
 
 app.use(express.urlencoded({ extended: true }));
 
