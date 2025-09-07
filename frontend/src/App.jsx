@@ -9,7 +9,7 @@ function App() {
     if (!url) return;
 
     try {
-      const response = await fetch("http://localhost:8000/url", {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/url`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ url }),
@@ -18,7 +18,7 @@ function App() {
       const data = await response.json();
 
       if (data.shortId) {
-        setShortUrl(`http://localhost:8000/${data.shortId}`);
+        setShortUrl(`${import.meta.env.VITE_BACKEND_URL}/${data.shortId}`);
       }
     } catch (error) {
       console.error("Error generating short URL:", error);
